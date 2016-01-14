@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% from "_formhelpers.html" import render_field %}
+{% set active_page = "puppies" %}
+{% block title %}Add New Puppy{% endblock %}
+{% block content %}
+
+<div class="container">
+
+<form method=post action="{{ url_for('add_puppy') }}">
+    {{ render_field(form.name) }}
+    {{ render_field(form.gender) }}
+    {{ render_field(form.dateofbirth) }}
+    {{ render_field(form.shelter) }}
+    <div class="form-group row">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" name="button" value="save">Save</button>
+        </div>
+    </div>
+</form>
+</div>
+
+{% endblock %}

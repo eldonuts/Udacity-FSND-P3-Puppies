@@ -1,0 +1,24 @@
+    <nav class="navbar navbar-dark bg-primary">
+        <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#navbar-header" aria-controls="navbar-header">
+        &#9776;
+        </button>
+        <div class="collapse navbar-toggleable-xs" id="navbar-header">
+            <ul class="nav navbar-nav">
+                {% for id, caption in navigation %}
+                <li class="nav-item{% if id == active_page %} active{% endif %}">
+                    <a class="nav-link" href="{{ url_for(id)}}">{{ caption }} <span class="sr-only">(current)</span></a>
+                </li>
+                {% endfor %}
+
+            </ul>
+            <form class="form-inline pull-xs-right">
+            {%if 'username' not in session %}
+                <a href="{{ url_for('initLogin') }}"><button class="btn btn-secondary" type="button">Login</button></a>
+            {% else %}
+                <a href="{{ url_for('logout') }}"><button class="btn btn-secondary" type="button">Logout</button></a>
+                <img src="{{ session['picture'] }}" alt="{{ session['username'] }}" class="img-circle" style="height:40px;width:40px;">
+            {% endif %}
+            </form>
+
+        </div>
+    </nav>

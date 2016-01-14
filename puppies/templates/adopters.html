@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% set active_page = "adopters" %}
+{% block title %}Adopters{% endblock %}
+{% block content %}
+
+<table class="table">
+    <thead class="thead-inverse">
+        <tr>
+            <th>Name</th>
+            <th>Puppies</th>
+        </tr>
+    </thead>
+        <tbody>
+            {% for adopter in adopters %}
+            <tr>
+
+                <th>{{ adopter.name }}</th>
+                <td>
+                {% for puppy in adopter.puppies %}
+                    <a href="{{ url_for('puppy',puppy_id = puppy.id) }}"><button type="button" class="btn btn-primary btn-sm">{{ puppy.name }}</button></a>
+                {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+</table>
+
+{% endblock %}

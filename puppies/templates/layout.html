@@ -1,0 +1,50 @@
+{% set navigation = [
+    ('home','Home'),
+    ('shelters', 'Shelters'),
+    ('puppies', 'Puppies'),
+    ('adopters', 'Adopters',)
+] -%}
+{% set active_page = active_page|default('home') -%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    <title>Puppy DB - {% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/png" href="/static/favicon.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-social/4.12.0/bootstrap-social.min.css">
+    <link rel="stylesheet" href="http://localhost:5000/static/navbar.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha256-GMscmjNs6MbZvXG2HRjP3MpdOGmXv078SRgH7M723Mc= sha512-1wnhBRtA+POGVA0yREk2RlDbJEdkNvMuRBGjT1FCI5wXmpiQHZWDIB8MpANBWM/GKSPDgCA/7HTrAIFgv70/Jw==" crossorigin="anonymous"></script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
+    <script src="http://localhost:5000/static/login.js"></script>
+
+    {% endblock %}
+</head>
+<body>
+
+<div class="container">
+    <!-- navbar -->
+    {% include "navbar.html" %}
+    <!-- /navbar -->
+
+    <!-- content -->
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert{% if 'delete' in message or 'no available' in message or 'overcrowded' in message %} alert-danger{% else %} alert-success{% endif %}" role="alert"> {{ message|safe }} </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- /content -->
+</div>
+</body>
+</html>

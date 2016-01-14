@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% set active_page = "home" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <a href="#" onclick="fb_login('{{ STATE }}')" class="btn btn-block btn-social btn-lg btn-facebook">
+            <span class="fa fa-facebook"></span> Sign in with Facebook
+        </a>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4" id="gSignInWrapper">
+        <div class="btn btn-block btn-social btn-lg btn-google" id="signinButton">
+            <span class="fa fa-google">
+            </span> Sign in with Google
+        </div>
+    </div>
+</div>
+
+
+<script>
+$('#signinButton').click(function() {
+    // signInCallback defined in step 6.
+    auth2.grantOfflineAccess({'redirect_uri': 'postmessage'}).then(signInCallback);
+  });
+</script>
+
+<script>
+function signInCallback(authResult) {
+  if (authResult['code']) {
+
+    // Hide the sign-in button now that the user is authorized, for example:
+    $('#signinButton').attr('style', 'display: none');
+
+    // Send the code to the server
+    $.ajax({
+      type: 'POST',
+      url: '/login_g?state={{ STATE }}',
+      contentType: 'application/octet-stream; charset=utf-8',
+      success: function(result) {
+        window.location.href = "/";
+      },
+      processData: false,
+      data: authResult['code']
+    });
+  } else {
+    // There was an error.
+  }
+}
+</script>
+
+
+<!-- GOOGLE PLUS SIGN IN BUTTON-->
+
+<!--
+<div id="signInButton">
+    <span class="g-signin"
+    data-scope="openid email"
+    data-clientid="298600907503-fgm7p78ilnj0rvktun02om0r5lqiel00.apps.googleusercontent.com"
+    data-redirecturi="postmessage"
+    data-accesstype="offline"
+    data-cookiepolicy="single_host_origin"
+    data-callback="signInCallback"
+    data-approvalprompt="force">
+    </span>
+</div>
+-->
+
+<!--END GOOGLE PLUS SIGN IN BUTTON -->
+
+{% endblock %}

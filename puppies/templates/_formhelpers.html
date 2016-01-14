@@ -1,0 +1,22 @@
+{% macro render_field(field) %}
+<div class="form-group row{% if field.errors %} has-danger{% endif %}">
+    {{ field.label(class_="col-sm-2 form-control-label") }}
+    <div class="col-sm-10">
+        {% set style = 'form-control' %}
+        {% if field.type == 'SelectField' %}
+            {% set style = style + ' c-select' %}
+        {% endif %}
+        {% if field.errors %}
+            {% set style = style + ' form-control-danger' %}
+        {% endif %}
+        {{ field(class_=style, **kwargs)|safe }}
+    </div>
+
+  {% if field.errors %}
+    {% for error in field.errors %}
+      <small class="text-muted red">{{ error }}</small>
+    {% endfor %}
+  {% endif %}
+
+</div>
+{% endmacro %}

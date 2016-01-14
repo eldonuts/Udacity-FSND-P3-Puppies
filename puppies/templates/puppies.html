@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% set active_page = "puppies" %}
+{% block title %}Puppies{% endblock %}
+{% block content %}
+
+<div class="container">
+
+<div class="row navbar">
+  <div class="col-sm-12">
+      <div class="pull-right text-xs-right">
+            <a href="{{ url_for('add_puppy') }}"><button type="button" class="btn btn-primary">Add Puppy</button></a>
+      </div>
+  </div>
+</div>
+
+<div class="row">
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Date of Birth</th>
+                <th>Shelter</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+            <tbody>
+                {% for puppy in puppies %}
+                <tr>
+
+                    <th><a href="{{ url_for('puppy', puppy_id=puppy.id) }}">{{ puppy.name }}</a></th>
+                    <td>{{ puppy.gender }}</td>
+                    <td>{{ puppy.dateOfBirth }}</td>
+                    <td>{{ puppy.shelter.name }}</td>
+                    <!-- <td><a href="#" data-toggle="modal" data-target=".bd-modal-{{ puppy.id }}">Edit</a></td> -->
+                    <td><a href="{{ url_for('edit_puppy', puppy_id=puppy.id) }}">Edit</a></td>
+                    <td><a href="{{ url_for('adopt', puppy_id=puppy.id) }}">Adopt</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+    </table>
+</div>
+
+</div>
+
+{% endblock %}

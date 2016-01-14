@@ -1,0 +1,11 @@
+flask
+flask_components
+flask_mail
+sqlalchemy
+random
+string
+json
+httplib2
+requests
+oauth2client
+logging
