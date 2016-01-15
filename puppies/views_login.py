@@ -42,7 +42,9 @@ def login_fb():
     access_token = request.data
     print "access token received %s " % access_token
 
-    app_id = json.loads(open('fb_client_secrets.json', 'r').read())[
+    client_secrets_file = app.config.get('CLIENT_SECRETS_DIR') + 'fb_client_secrets.json'
+
+    app_id = json.loads(open(client_secrets_file, 'r').read())[
         'web']['app_id']
     app_secret = json.loads(
         open('fb_client_secrets.json', 'r').read())['web']['app_secret']
@@ -102,9 +104,11 @@ def login_g():
     # Obtain authorization code
     code = request.data
 
+    client_secrets_file = app.config.get('CLIENT_SECRETS_DIR') + 'client_secrets.json'
+
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
+        oauth_flow = flow_from_clientsecrets(client_secrets_file, scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
