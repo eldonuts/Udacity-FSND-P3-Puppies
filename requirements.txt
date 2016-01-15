@@ -1,11 +1,7 @@
 flask==0.10.1
-flask_components
-flask_mail
+flask-components
+flask-mail
 sqlalchemy
-random
-string
-json
 httplib2
 requests
 oauth2client
-logging
