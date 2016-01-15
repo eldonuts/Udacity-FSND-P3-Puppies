@@ -25,7 +25,7 @@ class TestConfig(BaseConfig):
 
 class ProdConfig(BaseConfig):
     LOGGING_LEVEL = logging.WARNING
-    SERVER_PORT = os.getenv('OPENSHIFT_PYTHON_IP')
+    SERVER_PORT = os.getenv('OPENSHIFT_PYTHON_PORT')
     SERVER_IP = os.getenv('OPENSHIFT_PYTHON_IP')
     CLIENT_SECRETS_DIR = os.getenv('OPENSHIFT_DATA_DIR')
 
