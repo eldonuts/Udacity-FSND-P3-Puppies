@@ -47,7 +47,7 @@ def edit_puppy(puppy_id):
         gender = form.gender.data
         dateofbirth = datetime.strptime(form.dateofbirth.data.strftime('%Y-%m-%d'), '%Y-%m-%d')
         shelter = form.shelter.data
-        app.logger.info('edited puppy ' + puppy_id + ', arguments: ' + name + ", " + gender + ", " + str(dateofbirth) + ", " + str(shelter))
+        #app.logger.info('edited puppy ' + puppy_id + ', arguments: ' + name + ", " + gender + ", " + str(dateofbirth) + ", " + str(shelter))
         flash(form.name.data + ' has now been updated.')
         db.edit_puppy(puppy_id,name, gender, dateofbirth, shelter)
     return render_template('edit_puppy.html', form = form, puppy_id = puppy_id)
@@ -70,7 +70,7 @@ def add_puppy():
         dateofbirth = datetime.strptime(form.dateofbirth.data.strftime('%Y-%m-%d'), '%Y-%m-%d')
         shelter = form.shelter.data
         print(name + " - " + gender + " - " + str(dateofbirth) + " - " + str(shelter))
-        app.logger.info('added new puppy: ' + name + ", " + gender + ", " + str(dateofbirth) + ", " + str(shelter))
+        #app.logger.info('added new puppy: ' + name + ", " + gender + ", " + str(dateofbirth) + ", " + str(shelter))
         flash(form.name.data + ' has been added to database.')
         shelters = db.list_shelters()
         for x in shelters:
