@@ -1,7 +1,7 @@
 flask==0.10.1
 flask-components
 flask-mail
-sqlalchemy>=1.0.11
+sqlalchemy==1.0.11
 httplib2
 requests
 oauth2client
