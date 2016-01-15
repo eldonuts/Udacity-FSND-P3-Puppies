@@ -33,7 +33,7 @@ class TestConfig(BaseConfig):
 
 class ProdConfig(BaseConfig):
     LOGGING_LEVEL = logging.WARNING
-    SERVER_PORT = 20000
+    SERVER_PORT = 8080
     SERVER_IP = os.getenv("OPENSHIFT_PYTHON_IP")
     CLIENT_SECRETS_DIR = os.getenv('OPENSHIFT_DATA_DIR')
 
