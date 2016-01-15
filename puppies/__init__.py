@@ -8,5 +8,3 @@ from flask_mail import Mail
 mail = Mail(app)
 
 configure_app(app)
-
-app.config.from_pyfile('config.py')
