@@ -17,6 +17,8 @@ class BaseConfig(object):
     LOGGING_FORMAT = '%(asctime)s %(levelname)s: %(message)s'
     LOGGING_LEVEL = logging.DEBUG
     LOGGING_LOCATION = 'puppies.log'
+    SERVER_PORT = 5000
+    SERVER_IP = '0.0.0.0'
 
 
 class DevConfig(BaseConfig):
@@ -30,6 +32,8 @@ class TestConfig(BaseConfig):
 
 class ProdConfig(BaseConfig):
     LOGGING_LEVEL = logging.WARNING
+    SERVER_PORT = 20000
+    SERVER_IP = os.getenv("OPENSHIFT_INTERNAL_IP")
 
 
 def configure_app(app):
