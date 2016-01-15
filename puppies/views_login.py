@@ -12,8 +12,11 @@ from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 from oauth2client import client
 
+fb_client_secrets_file = app.config.get('CLIENT_SECRETS_DIR') + 'fb_client_secrets.json'
+g_client_secrets_file = app.config.get('CLIENT_SECRETS_DIR') + 'client_secrets.json'
+
 CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
+    open('g_client_secrets_file', 'r').read())['web']['client_id']
 
 @app.route('/session')
 def setSessionInfo():
@@ -42,12 +45,10 @@ def login_fb():
     access_token = request.data
     print "access token received %s " % access_token
 
-    client_secrets_file = app.config.get('CLIENT_SECRETS_DIR') + 'fb_client_secrets.json'
-
-    app_id = json.loads(open(client_secrets_file, 'r').read())[
+    app_id = json.loads(open(fb_client_secrets_file, 'r').read())[
         'web']['app_id']
     app_secret = json.loads(
-        open('fb_client_secrets.json', 'r').read())['web']['app_secret']
+        open('fb_client_secrets_file', 'r').read())['web']['app_secret']
     url = 'https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=%s&client_secret=%s&fb_exchange_token=%s' % (
         app_id, app_secret, access_token)
     h = httplib2.Http()
@@ -104,11 +105,11 @@ def login_g():
     # Obtain authorization code
     code = request.data
 
-    client_secrets_file = app.config.get('CLIENT_SECRETS_DIR') + 'client_secrets.json'
+
 
     try:
         # Upgrade the authorization code into a credentials object
-        oauth_flow = flow_from_clientsecrets(client_secrets_file, scope='')
+        oauth_flow = flow_from_clientsecrets(g_client_secrets_file, scope='')
         oauth_flow.redirect_uri = 'postmessage'
         credentials = oauth_flow.step2_exchange(code)
     except FlowExchangeError:
