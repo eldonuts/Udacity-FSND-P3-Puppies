@@ -63,6 +63,3 @@ target/
 
 # Database files
 *.db
-
-# Config File
-config.py
